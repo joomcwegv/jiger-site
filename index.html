@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JIGER Спорт Кешені</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f2f6fa;
+    }
+
+    .site-header {
+      background-color: #004080;
+      color: white;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+
+    .rounded-img {
+      max-width: 600px;
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      margin: 20px auto;
+      display: block;
+    }
+
+    .card {
+      margin-bottom: 1.5rem;
+    }
+
+    .site-footer {
+      background-color: #004080;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .social-links a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <!-- Навигация -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">JIGER</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="#">Басты бет</a></li>
+          <li class="nav-item"><a class="nav-link" href="#schedule">Кесте</a></li>
+          <li class="nav-item"><a class="nav-link" href="#pricing">Бағалар</a></li>
+          <li class="nav-item"><a class="nav-link" href="#form">Брондау</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header class="site-header">
+    <h1>«JIGER» Спорт Кешені</h1>
+    <p>Денсаулық пен шеберлік жолындағы серігіңіз</p>
+    <img class="rounded-img" src="jiger.jpg" alt="JIGER Спорт кешені" />
+  </header>
+
+  <!-- Қызметтер -->
+  <main class="container my-4">
+    <div class="card p-3">
+      <h2>⚽ Футзал</h2>
+      <p>Заманауи жабыны бар <a href="https://www.youtube.com/live/koXmnz33REo?si=K9lIDg4BLKmeCwHS">футзал алаңы</a>. Командалық рух пен жылдамдық үшін мінсіз орын.</p>
+    </div>
+    <div class="card p-3">
+      <h2>🏐 Волейбол</h2>
+      <p>Кәсіби стандарттарға сай <a href="https://www.instagram.com/p/DK3ott1IUY6/">волейбол залы</a>. Жарыстар мен жаттығуларға ыңғайлы.</p>
+    </div>
+    <div class="card p-3">
+      <h2>🏋️‍♀️ Фитнес</h2>
+      <p>Заманауи жабдықталған <a href="https://www.instagram.com/p/DF2Valko1TM/">фитнес залы</a>. Жеке және топтық жаттығулар.</p>
+    </div>
+  </main>
+
+  <!-- Сабақ Кестесі -->
+  <section id="schedule" class="container my-5">
+    <h3>📅 Сабақ кестесі</h3>
+    <table class="table table-bordered table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th>Күн</th>
+          <th>Футзал</th>
+          <th>Волейбол</th>
+          <th>Фитнес</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Дүйсенбі</td>
+          <td>18:00 – 20:00</td>
+          <td>16:00 – 18:00</td>
+          <td>08:00 – 22:00</td>
+        </tr>
+        <tr>
+          <td>Сейсенбі</td>
+          <td>16:00 – 18:00</td>
+          <td>18:00 – 20:00</td>
+          <td>08:00 – 22:00</td>
+        </tr>
+        <tr>
+          <td>Сәрсенбі</td>
+          <td>18:00 – 20:00</td>
+          <td>16:00 – 18:00</td>
+          <td>08:00 – 22:00</td>
+        </tr>
+        <tr>
+          <td>Бейсенбі</td>
+          <td>16:00 – 18:00</td>
+          <td>18:00 – 20:00</td>
+          <td>08:00 – 22:00</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Бағалар -->
+  <section id="pricing" class="container my-5">
+    <h3>💰 Қызмет бағалары</h3>
+    <ul class="list-group">
+      <li class="list-group-item">Футзал — 5000 ₸ / сағат</li>
+      <li class="list-group-item">Волейбол — 4000 ₸ / сағат</li>
+      <li class="list-group-item">Фитнес — 1000 ₸ / күн немесе 8000 ₸ / ай</li>
+    </ul>
+  </section>
+
+  <!-- Карта -->
+  <section class="container my-5">
+    <h3>📍 Орналасқан жері</h3>
+    <div class="ratio ratio-16x9">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2924.5461928109295!2d49.6362317!3d47.1172414!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x41eaee6c2b6f9875%3A0xabcdef!2z0JrQvdC70YzQstCw0YAg0JfQsNCz0L7QtNC10YDQvtCz!5e0!3m2!1sen!2skz!4v1628782640513!5m2!1sen!2skz"
+        width="600"
+        height="450"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
+      ></iframe>
+    </div>
+  </section>
+
+  <!-- Брондау формасы -->
+  <section id="form" class="container my-5">
+    <h3>📝 Брондау формасы</h3>
+    <form>
+      <div class="mb-3">
+        <label for="name" class="form-label">Атыңыз</label>
+        <input type="text" class="form-control" id="name" required />
+      </div>
+      <div class="mb-3">
+        <label for="service" class="form-label">Қызмет түрі</label>
+        <select class="form-select" id="service" required>
+          <option>Футзал</option>
+          <option>Волейбол</option>
+          <option>Фитнес</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="time" class="form-label">Күні мен уақыты</label>
+        <input type="datetime-local" class="form-control" id="time" required />
+      </div>
+      <button type="submit" class="btn btn-primary">Жіберу</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <h5>Бізбен байланысыңыз:</h5>
+    <div class="social-links">
+      <a href="https://www.youtube.com/@jigersportkesheni7284/streams" target="_blank">YouTube</a> |
+      <a href="https://www.instagram.com/jiger_sport_kesheni/" target="_blank">Instagram</a>
+    </div>
+    <p>&copy; 2025 «JIGER» Спорт Кешені. Барлық құқықтар қорғалған.</p>
+  </footer>
+</body>
+</html>
