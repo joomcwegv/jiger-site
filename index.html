@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="kk">
 <head>
@@ -81,10 +82,25 @@
         .site-header {
             background: linear-gradient(135deg, #16213e, #0f3460, #1a1a2e);
             color: white;
-            padding: 6rem 0;
+            padding: 6rem 0 8rem 0;
             text-align: center;
-            margin-bottom: 3rem;
-            border-bottom: 5px solid var(--primary-accent-color);
+            position: relative;
+        }
+
+        .site-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: var(--primary-bg-color);
+            clip-path: polygon(0 100%, 100% 0, 100% 100%);
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
         }
 
         .header-content h1 {
@@ -106,12 +122,14 @@
             box-shadow: 0 15px 35px rgba(0,0,0,0.4);
             margin-top: 2rem;
             border: 3px solid var(--primary-accent-color);
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            transition: transform 0.4s ease, box-shadow 0.4s ease, filter 0.4s ease;
+            filter: brightness(0.8) contrast(0.9);
         }
 
         .rounded-img:hover {
             transform: scale(1.05);
             box-shadow: 0 20px 45px rgba(3, 218, 198, 0.3);
+            filter: brightness(1) contrast(1);
         }
 
         .card {
