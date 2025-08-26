@@ -5,21 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>JIGER Спорт Кешені</title>
-    <meta name="description" content="Денсаулық пен шеберлік жолындағы сенімді серігіңіз. Футзал, волейбол, фитнес залдары.">
+    <title data-translate="pageTitle">JIGER Спорт Кешені</title>
+    <meta name="description" data-translate-content="metaDescription" content="Денсаулық пен шеберлік жолындағы сенімді серігіңіз. Футзал, волейбол, фитнес залдары.">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://joomcwegv.github.io/jiger-site/">
-    <meta property="og:title" content="JIGER Спорт Кешені">
-    <meta property="og:description" content="Денсаулық пен шеберлік жолындағы сенімді серігіңіз. Футзал, волейбол, фитнес залдары.">
+    <meta property="og:title" data-translate-content="pageTitle" content="JIGER Спорт Кешені">
+    <meta property="og:description" data-translate-content="metaDescription" content="Денсаулық пен шеберлік жолындағы сенімді серігіңіз. Футзал, волейбол, фитнес залдары.">
     <meta property="og:image" content="https://raw.githubusercontent.com/joomcwegv/jiger-site/main/jiger.jpeg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://joomcwegv.github.io/jiger-site/">
-    <meta property="twitter:title" content="JIGER Спорт Кешені">
-    <meta property="twitter:description" content="Денсаулық пен шеберлік жолындағы сенімді серігіңіз. Футзал, волейбол, фитнес залдары.">
+    <meta property="twitter:title" data-translate-content="pageTitle" content="JIGER Спорт Кешені">
+    <meta property="twitter:description" data-translate-content="metaDescription" content="Денсаулық пен шеберлік жолындағы сенімді серігіңіз. Футзал, волейбол, фитнес залдары.">
     <meta property="twitter:image" content="https://raw.githubusercontent.com/joomcwegv/jiger-site/main/jiger.jpeg">
 
     <meta name="theme-color" content="#03DAC6">
@@ -29,248 +29,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-bg-color: #121212;
-            --secondary-bg-color: #1E1E1E;
-            --primary-accent-color: #03DAC6;
-            --secondary-accent-color: #BB86FC;
-            --primary-text-color: rgba(255, 255, 255, 0.87);
-            --secondary-text-color: rgba(255, 255, 255, 0.6);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .fade-in-section {
-            animation: fadeIn 1s ease-out forwards;
-        }
-
-        body {
-            font-family: 'Roboto', sans-serif;
-            line-height: 1.7;
-            color: var(--primary-text-color);
-            background-color: var(--primary-bg-color);
-        }
-
-        .navbar {
-            background-color: rgba(30, 30, 30, 0.8);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-
-        .navbar-brand, .nav-link {
-            color: var(--primary-text-color) !important;
-            font-weight: 600;
-        }
-
-        .nav-link:hover, .navbar-brand:hover {
-            color: var(--primary-accent-color) !important;
-        }
-        
-        .weather-display {
-            font-size: 1rem;
-            font-weight: 500;
-            color: var(--primary-text-color);
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 8px 15px;
-            border-radius: 50px;
-        }
-
-        .site-header {
-            background: linear-gradient(135deg, #16213e, #0f3460, #1a1a2e);
-            color: white;
-            padding: 6rem 0 8rem 0;
-            text-align: center;
-            position: relative;
-        }
-
-        .site-header::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            background: var(--primary-bg-color);
-            clip-path: polygon(0 100%, 100% 0, 100% 100%);
-        }
-
-        .header-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .header-content h1 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 3.5rem;
-            font-weight: 700;
-            text-shadow: 0 0 15px rgba(3, 218, 198, 0.5);
-        }
-
-        .header-content p {
-            font-size: 1.3rem;
-            color: var(--secondary-text-color);
-        }
-
-        .rounded-img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-            margin-top: 2rem;
-            border: 3px solid var(--primary-accent-color);
-            transition: transform 0.4s ease, box-shadow 0.4s ease, filter 0.4s ease;
-            filter: brightness(0.8) contrast(0.9);
-        }
-
-        .rounded-img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 20px 45px rgba(3, 218, 198, 0.3);
-            filter: brightness(1) contrast(1);
-        }
-
-        .card {
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            margin-bottom: 2rem;
-            background-color: var(--secondary-bg-color);
-            color: var(--primary-text-color);
-        }
-
-        .card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-        }
-
-        .card h2 {
-            font-family: 'Poppins', sans-serif;
-            color: var(--primary-accent-color);
-            font-weight: 600;
-        }
-        
-        .card .fas, .card .fab {
-            color: var(--secondary-accent-color);
-        }
-
-        .card a {
-            color: var(--secondary-accent-color);
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        .card a:hover {
-            color: var(--primary-accent-color);
-        }
-
-        .site-footer {
-            background-color: #000;
-            color: var(--secondary-text-color);
-            padding: 4rem 0;
-            text-align: center;
-            border-top: 3px solid var(--primary-accent-color);
-        }
-
-        .site-footer h3 {
-            font-family: 'Poppins', sans-serif;
-            color: var(--primary-text-color);
-            margin-bottom: 2rem;
-        }
-
-        .social-links a {
-            color: var(--secondary-text-color);
-            font-size: 1.5rem;
-            transition: color 0.3s ease, transform 0.3s ease;
-        }
-
-        .social-links a:hover {
-            transform: translateY(-5px);
-        }
-        .social-links a:hover .fa-youtube { color: #FF0000; }
-        .social-links a:hover .fa-instagram { color: #E4405F; }
-        .social-links a:hover .fa-facebook { color: #1877F2; }
-        .social-links a:hover .fa-telegram { color: #26A5E4; }
-        .social-links a:hover .fa-whatsapp { color: #25D366; }
-
-        #quiz, #feedback, #guestbook {
-            background-color: var(--secondary-bg-color);
-            padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-            margin-bottom: 3rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        h3.text-center.mb-4 {
-            font-family: 'Poppins', sans-serif;
-            color: var(--primary-text-color);
-            font-weight: 600;
-        }
-
-        .btn-primary {
-            background-color: var(--primary-accent-color);
-            border-color: var(--primary-accent-color);
-            color: #000;
-            font-weight: 600;
-            padding: 12px 30px;
-            border-radius: 50px;
-            transition: background-color 0.3s, transform 0.3s;
-        }
-
-        .btn-primary:hover {
-            background-color: #03c4b3;
-            transform: translateY(-3px);
-        }
-        
-        .btn-success {
-            background-color: var(--secondary-accent-color);
-            border-color: var(--secondary-accent-color);
-            color: #000;
-            font-weight: 600;
-            padding: 12px 30px;
-            border-radius: 50px;
-            transition: background-color 0.3s, transform 0.3s;
-        }
-        
-        .btn-success:hover {
-            background-color: #a975f5;
-            transform: translateY(-3px);
-        }
-        
-        .form-control {
-            background-color: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: var(--primary-text-color);
-            border-radius: 10px;
-        }
-        
-        .form-control:focus {
-            background-color: rgba(255, 255, 255, 0.1);
-            border-color: var(--primary-accent-color);
-            box-shadow: 0 0 0 0.25rem rgba(3, 218, 198, 0.25);
-            color: var(--primary-text-color);
-        }
-        
-        label.form-label {
-            color: var(--secondary-text-color);
-        }
-        
-        hr {
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        @media (max-width: 768px) {
-            .header-content h1 { font-size: 2.5rem; }
-            .header-content p { font-size: 1.1rem; }
-            .social-links { flex-direction: row; }
-        }
-    </style>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
@@ -282,13 +42,27 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link active" href="#"><i class="fas fa-home me-1"></i> Басты бет</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#services"><i class="fas fa-list me-1"></i> Қызметтер</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#quiz"><i class="fas fa-question-circle me-1"></i> Тест</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#feedback"><i class="fas fa-envelope me-1"></i> Байланыс</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#" data-translate="navHome"><i class="fas fa-home me-1"></i> Басты бет</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services" data-translate="navServices"><i class="fas fa-list me-1"></i> Қызметтер</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#photogallery" data-translate="navGallery"><i class="fas fa-images me-1"></i> Фотогалерея</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#quiz" data-translate="navQuiz"><i class="fas fa-question-circle me-1"></i> Тест</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#feedback" data-translate="navContact"><i class="fas fa-envelope me-1"></i> Байланыс</a></li>
+                    <li class="nav-item ms-lg-2">
+                        <a class="nav-link" href="#" id="theme-toggler" data-translate-title="themeTogglerTitle" title="Түн/Күн режимі">
+                            <i class="fas fa-sun"></i>
+                        </a>
+                    </li>
                 </ul>
+                <div id="auth-container" class="d-flex align-items-center ms-lg-2 mt-2 mt-lg-0">
+                    <!-- Auth state will be rendered here by JS -->
+                </div>
+                <div class="language-switcher d-flex ms-lg-2 mt-2 mt-lg-0">
+                    <button class="btn btn-sm" data-lang="kk">KZ</button>
+                    <button class="btn btn-sm" data-lang="ru">RU</button>
+                    <button class="btn btn-sm" data-lang="en">EN</button>
+                </div>
             </div>
         </div>
     </nav>
@@ -296,24 +70,24 @@
     <header class="site-header">
         <div class="container">
             <div class="header-content">
-                <h1>«JIGER» Спорт Кешені</h1>
-                <p>Денсаулық пен шеберлік жолындағы сенімді серігіңіз</p>
+                <h1 data-translate="headerTitle">«JIGER» Спорт Кешені</h1>
+                <p data-translate="headerSubtitle">Денсаулық пен шеберлік жолындағы сенімді серігіңіз</p>
                 <img class="rounded-img" src="jiger.jpeg" alt="JIGER Спорт Кешені">
             </div>
         </div>
     </header>
 
     <main class="container">
-        <section id="services" class="row fade-in-section">
+        <section id="services" class="row">
             <div class="col-md-4">
                 <div class="card h-100">
                     <div class="card-body">
-                        <h2><i class="fas fa-futbol me-2"></i>⚽ Футзал</h2>
-                        <p>Заманауи жабыны бар <a href="https://www.youtube.com/shorts/LZ53PDmbemM" title="Футзал алаңын брондау">футзал алаңы</a>. Командалық рух пен жылдамдық үшін мінсіз орын.</p>
+                        <h2 data-translate="serviceFutsalTitle"><i class="fas fa-futbol me-2"></i>⚽ Футзал</h2>
+                        <p data-translate="serviceFutsalDesc">Заманауи жабыны бар <a href="https://www.youtube.com/shorts/LZ53PDmbemM" title="Футзал алаңын брондау">футзал алаңы</a>. Командалық рух пен жылдамдық үшін мінсіз орын.</p>
                         <ul class="list-unstyled">
-                            <li><i class="fas fa-check-circle text-success me-2"></i>Кәсіби стандарттар</li>
-                            <li><i class="fas fa-check-circle text-success me-2"></i>Жарыс деңгейіндегі алаң</li>
-                            <li><i class="fas fa-check-circle text-success me-2"></i>Жақсы жарықтандыру</li>
+                            <li data-translate="serviceFutsal1"><i class="fas fa-check-circle text-success me-2"></i>Кәсіби стандарттар</li>
+                            <li data-translate="serviceFutsal2"><i class="fas fa-check-circle text-success me-2"></i>Жарыс деңгейіндегі алаң</li>
+                            <li data-translate="serviceFutsal3"><i class="fas fa-check-circle text-success me-2"></i>Жақсы жарықтандыру</li>
                         </ul>
                     </div>
                 </div>
@@ -321,12 +95,12 @@
             <div class="col-md-4">
                 <div class="card h-100">
                     <div class="card-body">
-                        <h2><i class="fas fa-volleyball-ball me-2"></i>🏐 Волейбол</h2>
-                        <p>Кәсіби стандарттарға сай <a href="https://www.instagram.com/p/DNpRKA6Iy8D/" title="Волейбол залын брондау">волейбол залы</a>. Жарыстар мен жаттығуларға қолайлы.</p>
+                        <h2 data-translate="serviceVoleyballTitle"><i class="fas fa-volleyball-ball me-2"></i>🏐 Волейбол</h2>
+                        <p data-translate="serviceVoleyballDesc">Кәсіби стандарттарға сай <a href="https://www.instagram.com/p/DNpRKA6Iy8D/" title="Волейбол залын брондау">волейбол залы</a>. Жарыстар мен жаттығуларға қолайлы.</p>
                         <ul class="list-unstyled">
-                            <li><i class="fas fa-check-circle text-success me-2"></i>Халықаралық стандарттар</li>
-                            <li><i class="fas fa-check-circle text-success me-2"></i>Еркін брондау мүмкіндігі</li>
-                            <li><i class="fas fa-check-circle text-success me-2"></i>Тренерлер қызметі</li>
+                            <li data-translate="serviceVoleyball1"><i class="fas fa-check-circle text-success me-2"></i>Халықаралық стандарттар</li>
+                            <li data-translate="serviceVoleyball2"><i class="fas fa-check-circle text-success me-2"></i>Еркін брондау мүмкіндігі</li>
+                            <li data-translate="serviceVoleyball3"><i class="fas fa-check-circle text-success me-2"></i>Тренерлер қызметі</li>
                         </ul>
                     </div>
                 </div>
@@ -334,61 +108,88 @@
             <div class="col-md-4">
                 <div class="card h-100">
                     <div class="card-body">
-                        <h2><i class="fas fa-dumbbell me-2"></i>🏋️‍♀️ Фитнес</h2>
-                        <p>Кең әрі заманауи жабдықталған <a href="https://www.instagram.com/p/DAn9DjqIl1W/" title="Фитнес залына жазылу">фитнес залы</a>. Жеке және топтық жаттығулар үшін.</p>
+                        <h2 data-translate="serviceFitnessTitle"><i class="fas fa-dumbbell me-2"></i>🏋️‍♀️ Фитнес</h2>
+                        <p data-translate="serviceFitnessDesc">Кең әрі заманауи жабдықталған <a href="https://www.instagram.com/p/DAn9DjqIl1W/" title="Фитнес залына жазылу">фитнес залы</a>. Жеке және топтық жаттығулар үшін.</p>
                         <ul class="list-unstyled">
-                            <li><i class="fas fa-check-circle text-success me-2"></i>Жеке тренерлер</li>
-                            <li><i class="fas fa-check-circle text-success me-2"></i>Жоғары сапалы жабдықтар</li>
-                            <li><i class="fas fa-check-circle text-success me-2"></i>Жеке бағдарламалар</li>
+                            <li data-translate="serviceFitness1"><i class="fas fa-check-circle text-success me-2"></i>Жеке тренерлер</li>
+                            <li data-translate="serviceFitness2"><i class="fas fa-check-circle text-success me-2"></i>Жоғары сапалы жабдықтар</li>
+                            <li data-translate="serviceFitness3"><i class="fas fa-check-circle text-success me-2"></i>Жеке бағдарламалар</li>
                         </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="quiz" class="my-5 fade-in-section">
-            <h3 class="text-center mb-4"><i class="fas fa-brain me-2"></i>🧠 Спорттық тест</h3>
+        <section id="quiz" class="my-5">
+            <h3 class="text-center mb-4" data-translate="quizTitle"><i class="fas fa-brain me-2"></i>🧠 Спорттық тест</h3>
             <div class="card">
                 <div class="card-body">
                     <div id="question" class="mb-3 fw-bold h5"></div>
                     <div id="answers" class="mb-3 d-flex flex-wrap gap-2"></div>
                     <div class="d-flex justify-content-between align-items-center">
-                        <button onclick="nextQuestion()" class="btn btn-success"><i class="fas fa-forward me-1"></i>Келесі сұрақ</button>
-                        <div id="progress" class="text-muted"></div>
+                        <button id="nextQuestionBtn" class="btn btn-success" data-translate="quizNextBtn"><i class="fas fa-forward me-1"></i>Келесі сұрақ</button>
+                        <div class="d-flex align-items-center gap-3">
+                            <div id="timer-container" class="d-flex align-items-center gap-1">
+                                <i class="fas fa-clock text-info"></i>
+                                <div id="timer" class="fw-bold fs-5" data-translate-title="quizTimerTitle" title="Сұраққа жауап беру уақыты"></div>
+                            </div>
+                            <div id="progress" class="text-muted"></div>
+                        </div>
                     </div>
                     <p id="result" class="mt-3 fw-bold text-center"></p>
                 </div>
             </div>
         </section>
 
-        <section id="feedback" class="my-5 fade-in-section">
-            <h3 class="text-center mb-4"><i class="fas fa-envelope me-2"></i>📩 Кері байланыс формасы</h3>
+        <section id="feedback" class="my-5">
+            <h3 class="text-center mb-4" data-translate="feedbackTitle"><i class="fas fa-envelope me-2"></i>📩 Кері байланыс формасы</h3>
             <div class="card">
                 <div class="card-body">
                     <form id="feedbackForm">
-                        <div class="mb-3"><label for="name" class="form-label">Атыңыз</label><input type="text" class="form-control" name="name" id="name" required></div>
-                        <div class="mb-3"><label for="email" class="form-label">Электронды пошта</label><input type="email" class="form-control" name="email" id="email" required></div>
-                        <div class="mb-3"><label for="message" class="form-label">Хабарлама</label><textarea class="form-control" name="message" id="message" rows="4" required></textarea></div>
-                        <div class="d-grid"><button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane me-1"></i>Жіберу</button></div>
+                        <div class="mb-3"><label for="name" class="form-label" data-translate="feedbackName">Атыңыз</label><input type="text" class="form-control" name="name" id="name" required></div>
+                        <div class="mb-3"><label for="email" class="form-label" data-translate="feedbackEmail">Электронды пошта</label><input type="email" class="form-control" name="email" id="email" required></div>
+                        <div class="mb-3"><label for="message" class="form-label" data-translate="feedbackMessage">Хабарлама</label><textarea class="form-control" name="message" id="message" rows="4" required></textarea></div>
+                        <div class="d-grid"><button type="submit" class="btn btn-primary" data-translate="feedbackSubmitBtn"><i class="fas fa-paper-plane me-1"></i>Жіберу</button></div>
                         <p id="formStatus" class="mt-3 text-center"></p>
                     </form>
                 </div>
             </div>
         </section>
 
-        <section id="guestbook" class="my-5 fade-in-section">
-            <h3 class="text-center mb-4"><i class="fas fa-book me-2"></i>📖 Қонақ кітабы</h3>
+        <section id="photogallery" class="my-5">
+            <h3 class="text-center mb-4" data-translate="galleryTitle"><i class="fas fa-images me-2"></i>Фотогалерея</h3>
             <div class="card">
                 <div class="card-body">
-                    <form onsubmit="addComment(event)">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4 col-6 mb-4"><img src="jiger.jpeg" class="img-fluid img-thumbnail gallery-img" alt="Jiger Logo"></div>
+                        <div class="col-lg-3 col-md-4 col-6 mb-4"><img src="images/Amirkhan.jpg" class="img-fluid img-thumbnail gallery-img" alt="Amirkhan"></div>
+                        <div class="col-lg-3 col-md-4 col-6 mb-4"><img src="images/atrium.jpg" class="img-fluid img-thumbnail gallery-img" alt="atrium"></div>
+                        <div class="col-lg-3 col-md-4 col-6 mb-4"><img src="images/Kulager.jpg" class="img-fluid img-thumbnail gallery-img" alt="Kulager"></div>
+                        <div class="col-lg-3 col-md-4 col-6 mb-4"><img src="images/Lokomativ atr.jpg" class="img-fluid img-thumbnail gallery-img" alt="Lokomativ atr"></div>
+                        <div class="col-lg-3 col-md-4 col-6 mb-4"><img src="images/Madeniet Oral.jpg" class="img-fluid img-thumbnail gallery-img" alt="Madeniet Oral"></div>
+                        <div class="col-lg-3 col-md-4 col-6 mb-4"><img src="images/mako.jpg" class="img-fluid img-thumbnail gallery-img" alt="mako"></div>
+                        <div class="col-lg-3 col-md-4 col-6 mb-4"><img src="images/medina.jpg" class="img-fluid img-thumbnail gallery-img" alt="medina"></div>
+                        <div class="col-lg-3 col-md-4 col-6 mb-4"><img src="images/MFC DOSSOR.jpg" class="img-fluid img-thumbnail gallery-img" alt="MFC DOSSOR"></div>
+                        <div class="col-lg-3 col-md-4 col-6 mb-4"><img src="images/MFC Kit KRAI.jpg" class="img-fluid img-thumbnail gallery-img" alt="MFC Kit KRAI"></div>
+                        <div class="col-lg-3 col-md-4 col-6 mb-4"><img src="images/TEMYRLAN.jpeg" class="img-fluid img-thumbnail gallery-img" alt="TEMYRLAN"></div>
+                        <div class="col-lg-3 col-md-4 col-6 mb-4"><img src="images/Zhiger Mynai Servis.jpg" class="img-fluid img-thumbnail gallery-img" alt="Zhiger Mynai Servis"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="guestbook" class="my-5">
+            <h3 class="text-center mb-4" data-translate="guestbookTitle"><i class="fas fa-book me-2"></i>📖 Қонақ кітабы</h3>
+            <div class="card">
+                <div class="card-body">
+                    <form id="guestbookForm">
                         <div class="row">
-                            <div class="col-md-6 mb-3"><label for="username" class="form-label">Атыңыз</label><input type="text" id="username" class="form-control" required></div>
-                            <div class="col-md-6 mb-3"><label for="userEmail" class="form-label">Электронды пошта (міндетті емес)</label><input type="email" id="userEmail" class="form-control"></div>
+                            <div class="col-md-6 mb-3"><label for="username" class="form-label" data-translate="guestbookName">Атыңыз</label><input type="text" id="username" class="form-control" required></div>
                         </div>
-                        <div class="mb-3"><label for="guestbookMessage" class="form-label">Пікіріңіз</label><textarea id="guestbookMessage" class="form-control" rows="3" required></textarea></div>
-                        <div class="d-grid"><button type="submit" class="btn btn-primary"><i class="fas fa-comment me-1"></i>Пікір қалдыру</button></div>
+                        <div class="mb-3"><label for="guestbookMessage" class="form-label" data-translate="guestbookMessage">Пікіріңіз</label><textarea id="guestbookMessage" class="form-control" rows="3" required></textarea></div>
+                        <div class="d-grid"><button type="submit" class="btn btn-primary" data-translate="guestbookSubmitBtn"><i class="fas fa-comment me-1"></i>Пікір қалдыру</button></div>
                     </form>
-                    <hr><h5 class="mt-4"><i class="fas fa-comments me-2"></i>🗣 Жаңа пікірлер:</h5>
+                    <hr><h5 class="mt-4" data-translate="guestbookCommentsTitle"><i class="fas fa-comments me-2"></i>🗣 Жаңа пікірлер:</h5>
                     <div id="comments" class="mt-3"></div>
                 </div>
             </div>
@@ -397,175 +198,69 @@
 
     <footer class="site-footer">
         <div class="container">
-            <h3>Бізбен байланысыңыз</h3>
+            <h3 data-translate="footerContactUs">Бізбен байланысыңыз</h3>
             <ul class="social-links list-inline">
-                <li class="list-inline-item"><a href="https://www.youtube.com/@jigersportkesheni7284/streams" target="_blank"><i class="fab fa-youtube"></i></a></li>
-                <li class="list-inline-item"><a href="https://www.instagram.com/jiger_sport_kesheni/" target="_blank"><i class="fab fa-instagram"></i></a></li>
-                <li class="list-inline-item"><a href="#" target="_blank"><i class="fab fa-facebook"></i></a></li>
-                <li class="list-inline-item"><a href="https://t.me/+77780574552" target="_blank"><i class="fab fa-telegram"></i></a></li>
-                <li class="list-inline-item"><a href="https://wa.me/77780574552" target="_blank"><i class="fab fa-whatsapp"></i></a></li>
+                <li class="list-inline-item"><a href="https://www.youtube.com/@jigersportkesheni7284/streams" target="_blank" rel="noopener noreferrer" aria-label="JIGER on YouTube"><i class="fab fa-youtube"></i></a></li>
+                <li class="list-inline-item"><a href="https://www.instagram.com/jiger_sport_kesheni/" target="_blank" rel="noopener noreferrer" aria-label="JIGER on Instagram"><i class="fab fa-instagram"></i></a></li>
+                <li class="list-inline-item"><a href="#" target="_blank" rel="noopener noreferrer" aria-label="JIGER on Facebook"><i class="fab fa-facebook"></i></a></li>
+                <li class="list-inline-item"><a href="https://t.me/+77780574552" target="_blank" rel="noopener noreferrer" aria-label="JIGER on Telegram"><i class="fab fa-telegram"></i></a></li>
+                <li class="list-inline-item"><a href="https://wa.me/77780574552" target="_blank" rel="noopener noreferrer" aria-label="JIGER on WhatsApp"><i class="fab fa-whatsapp"></i></a></li>
             </ul>
             <div class="footer-info">
-                <p><i class="fas fa-map-marker-alt me-2"></i>Қазақстан, Құлсары қаласы</p>
-                <p><i class="fas fa-phone me-2"></i>+7 (778) 057 45 52</p>
-                <p><i class="fas fa-envelope me-2"></i>info@jigersport.kz</p>
-                <p>&copy; 2025 «JIGER» Спорт Кешені. Барлық құқықтар қорғалған.</p>
+                <p><a href="https://2gis.kz/atyrau/geo/70000001090340937" target="_blank" rel="noopener noreferrer" data-translate="footerAddress"><i class="fas fa-map-marker-alt me-2"></i>Қазақстан, Құлсары қаласы</a></p>
+                <p data-translate="footerPhone"><i class="fas fa-phone me-2"></i>+7 (778) 057 45 52</p>
+                <p data-translate="footerEmail"><a href="mailto:jigersport@mail.ru"><i class="fas fa-envelope me-2"></i>jigersport@mail.ru</a></p>
+                <p data-translate="footerCopyright">&copy; 2025 «JIGER» Спорт Кешені. Барлық құқықтар қорғалған.</p>
             </div>
         </div>
     </footer>
 
+    <!-- Photo Gallery Modal -->
+    <div class="modal fade" id="galleryModal" tabindex="-1" aria-labelledby="galleryModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content bg-dark">
+                <div class="modal-body text-center p-0">
+                    <img src="" id="modalImage" class="img-fluid" alt="Gallery Image">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Phone Auth Modal -->
+    <div class="modal fade" id="phoneAuthModal" tabindex="-1" aria-labelledby="phoneAuthModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="background-color: var(--secondary-bg-color); color: var(--primary-text-color);">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="phoneAuthModalLabel" data-translate="phoneAuthTitle">Телефон арқылы кіру</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="phone-input-view">
+                        <div class="mb-3">
+                            <label for="phone-number" class="form-label" data-translate="phoneNumberLabel">Телефон нөмірі</label>
+                            <input type="tel" class="form-control" id="phone-number" placeholder="+7 (700) 123-45-67">
+                        </div>
+                        <button id="send-code-btn" class="btn btn-primary w-100" data-translate="sendCodeBtn">Код жіберу</button>
+                    </div>
+                    <div id="code-input-view" class="d-none">
+                        <div class="mb-3">
+                            <label for="verification-code" class="form-label" data-translate="verificationCodeLabel">Растау коды</label>
+                            <input type="text" class="form-control" id="verification-code" placeholder="123456">
+                        </div>
+                        <button id="verify-code-btn" class="btn btn-success w-100" data-translate="verifyCodeBtn">Растау</button>
+                    </div>
+                    <div id="recaptcha-container" class="mt-3"></div>
+                    <p id="phone-auth-error" class="text-danger mt-2"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Lazy load animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in-section');
-                }
-            });
-        });
-        document.querySelectorAll('section').forEach(section => {
-            observer.observe(section);
-        });
-
-        // Weather script (the rest of the JS is the same)
-        const apiKey = "a1ec03a2e6f789a2df13796ff0ee07fc";
-        const city = "Kulsary";
-        const weatherTranslations = { "clear sky": "ашық аспан", "few clouds": "аздаған бұлт", "scattered clouds": "шашыраған бұлттар", "broken clouds": "жартылай бұлтты", "overcast clouds": "толық бұлтты", "shower rain": "қатты жаңбыр", "rain": "жаңбыр", "light rain": "әлсіз жаңбыр", "moderate rain": "орташа жаңбыр", "heavy intensity rain": "қатты жаңбыр", "thunderstorm": "найзағай", "snow": "қар", "mist": "тұман" };
-        async function fetchWeather() {
-            const weatherElement = document.getElementById("weather");
-            const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=en`;
-            try {
-                const res = await fetch(url);
-                const data = await res.json();
-                const temp = Math.round(data.main.temp);
-                const rawDesc = data.weather[0].description;
-                const desc = weatherTranslations[rawDesc] || rawDesc;
-                const cityName = data.name || city;
-                weatherElement.innerHTML = `🌤️ ${cityName}: ${temp}°C, ${desc}`;
-            } catch (err) {
-                console.error("Ауа райын жүктеу қатесі:", err);
-                weatherElement.textContent = "Ауа райы қолжетімсіз";
-            }
-        }
-
-        const commentsList = [];
-        function addComment(e) {
-            e.preventDefault();
-            const name = document.getElementById('username').value.trim();
-            const email = document.getElementById('userEmail').value.trim();
-            const msg = document.getElementById('guestbookMessage').value.trim();
-            if (name && msg) {
-                const comment = { name, msg, date: new Date().toLocaleString(), email: email || 'Email көрсетілмеген' };
-                commentsList.unshift(comment);
-                renderComments();
-                document.getElementById('username').value = '';
-                document.getElementById('userEmail').value = '';
-                document.getElementById('guestbookMessage').value = '';
-            }
-        }
-        function renderComments() {
-            const container = document.getElementById('comments');
-            container.innerHTML = commentsList.map(c =>
-                `<div class="border p-3 mb-3 rounded-3"><div class="d-flex justify-content-between mb-2"><strong>${c.name}</strong><small class="text-muted">${c.date}</small></div><p class="mb-1">${c.msg}</p><small class="text-muted">${c.email}</small></div>`
-            ).join('');
-        }
-
-        const quiz = [
-            { question: "🏃 Олимпиада ойындары алғаш рет қай жылы өтті?", options: ["1900", "1896", "1912", "1924"], answer: "1896" },
-            { question: "⚽ «Алтын доп» (Ballon d'Or) марапатын ең көп алған футболшы кім?", options: ["Криштиану Роналду", "Диего Марадона", "Лионель Месси", "Зинедин Зидан"], answer: "Лионель Месси" },
-            { question: "🥋 Таэквондо қай елден шыққан?", options: ["Қытай", "Жапония", "Оңтүстік Корея", "Тайланд"], answer: "Оңтүстік Корея" },
-            { question: "⚡ 100 метрге жүгіру рекордын орнатқан спортшы кім?", options: ["Карл Льюис", "Усэйн Болт", "Тайсон Гэй", "Майкл Джонсон"], answer: "Усэйн Болт" },
-            { question: "🇰🇿 Қазақстанда қысқы Азия ойындары қай жылы өтті?", options: ["2003", "2007", "2011", "2015"], answer: "2011" },
-            { question: "🚴 Велоспорттағы әйгілі жарыс қалай аталады?", options: ["IronMan", "Tour de France", "Giro d’Italia", "Formula One"], answer: "Tour de France" },
-            { question: "🟥 Футболда қызыл карточка не білдіреді?", options: ["Ескерту", "Доп беру", "Ойыннан шығару", "Қосымша ұпай"], answer: "Ойыннан шығару" },
-            { question: "💓 Фитнес залындағы 'кардио' жаттығу дегеніміз не?", options: ["Салмақ көтеру", "Созылу", "Жүрек пен тынысқа арналған жаттығу", "Доппен ойнау"], answer: "Жүрек пен тынысқа арналған жаттығу" },
-            { question: "🏇 Қазақстанда ең көп таралған ұлттық спорт түрі:", options: ["Асық ату", "Көкпар", "Тоғызқұмалақ", "Жамбы ату"], answer: "Көкпар" },
-            { question: "🔥 «Ironman» деген не?", options: ["Футбол лигасы", "Үш түрлі спорт түрін біріктіретін жарыс", "Қарулы күштер сайысы", "Жүзу жарысы"], answer: "Үш түрлі спорт түрін біріктіретін жарыс" },
-            { question: "2020 жылғы Жазғы Олимпиада қай елде өтті (кейінге шегерілген)?", options: ["Қытай", "Жапония", "Оңтүстік Корея", "Бразилия"], answer: "Жапония" },
-            { question: "2018 жылғы Футболдан Әлем чемпионаты қай елде өтті?", options: ["Германия", "Ресей", "Бразилия", "Катар"], answer: "Ресей" },
-            { question: "2022 жылғы Футболдан Әлем чемпионаты қай елде өтті?", options: ["Катар", "АҚШ", "Аргентина", "Англия"], answer: "Катар" },
-            { question: "2016 жылғы Жазғы Олимпиада қай қалада өтті?", options: ["Рио-де-Жанейро", "Токио", "Пекин", "Афины"], answer: "Рио-де-Жанейро" },
-            { question: "2008 жылғы Олимпиада ойындары қай қалада өтті?", options: ["Токио", "Пекин", "Лондон", "Сеул"], answer: "Пекин" },
-            { question: "2002 жылғы Футболдан Әлем чемпионаты қандай екі елде өтті?", options: ["Жапония және Оңтүстік Корея", "Франция және Германия", "Италия және Испания", "АҚШ және Мексика"], answer: "Жапония және Оңтүстік Корея" },
-            { question: "2026 жылғы Футболдан Әлем чемпионатын өткізетін елдер:", options: ["Канада, АҚШ, Мексика", "Бразилия, Аргентина, Уругвай", "Англия, Шотландия, Уэльс", "Қатар, Иран, Ирак"], answer: "Канада, АҚШ, Мексика" },
-            { question: "1994 жылғы Әлем чемпионаты қай елде өтті?", options: ["АҚШ", "Италия", "Германия", "Франция"], answer: "АҚШ" },
-            { question: "2024 жылғы Жазғы Олимпиада қай қалада өтеді?", options: ["Париж", "Лос-Анджелес", "Токио", "Рим"], answer: "Париж" },
-            { question: "Футболдан 2010 жылғы Әлем чемпионаты Африкада алғаш рет өтті. Қай елде?", options: ["Египет", "ОАР", "Марокко", "Нигерия"], answer: "ОАР" }
-        ];
-        let currentQuestion = 0;
-        let score = 0;
-        function loadQuestion() {
-            const q = quiz[currentQuestion];
-            document.getElementById("question").textContent = q.question;
-            document.getElementById("progress").textContent = `${currentQuestion + 1}/${quiz.length}`;
-            const answers = q.options.map(option => `<button class="btn btn-outline-primary" onclick="checkAnswer('''${option}''')">${option}</button>`).join("");
-            document.getElementById("answers").innerHTML = answers;
-            document.getElementById("result").textContent = "";
-        }
-        function checkAnswer(selected) {
-            const correct = quiz[currentQuestion].answer;
-            const resultElement = document.getElementById("result");
-            if (selected === correct) {
-                score++;
-                resultElement.innerHTML = '<i class="fas fa-check-circle text-success me-2"></i>Дұрыс жауап!';
-            } else {
-                resultElement.innerHTML = `<i class="fas fa-times-circle text-danger me-2"></i>Қате! Дұрыс жауап: ${correct}`;
-            }
-            const buttons = document.querySelectorAll("#answers button");
-            buttons.forEach(btn => {
-                btn.disabled = true;
-                if (btn.textContent === selected) {
-                    btn.classList.remove("btn-outline-primary");
-                    btn.classList.add(selected === correct ? "btn-success" : "btn-danger");
-                }
-                if (btn.textContent === correct && selected !== correct) {
-                    btn.classList.remove("btn-outline-primary");
-                    btn.classList.add("btn-success");
-                }
-            });
-        }
-        function nextQuestion() {
-            currentQuestion++;
-            if (currentQuestion < quiz.length) {
-                loadQuestion();
-            } else {
-                document.getElementById("question").textContent = "Тест аяқталды!";
-                document.getElementById("answers").innerHTML = "";
-                document.getElementById("progress").textContent = "";
-                let message;
-                if (score === quiz.length) {
-                    message = `<span class="text-success"><i class="fas fa-trophy me-2"></i>Керемет! Сіз барлық сұрақтарға дұрыс жауап бердіңіз: ${score}/${quiz.length}</span>`;
-                } else if (score >= quiz.length / 2) {
-                    message = `<span class="text-primary"><i class="fas fa-thumbs-up me-2"></i>Жақсы! Сіздің нәтижеңіз: ${score}/${quiz.length}</span>`;
-                } else {
-                    message = `<span class="text-warning"><i class="fas fa-lightbulb me-2"></i>Спорт туралы көбірек оқып, қайта келіңіз! Нәтижеңіз: ${score}/${quiz.length}</span>`;
-                }
-                document.getElementById("result").innerHTML = message;
-                const restartBtn = `<button onclick="restartQuiz()" class="btn btn-primary mt-3"><i class="fas fa-redo me-1"></i>Тестті қайта бастау</button>`;
-                document.getElementById("result").innerHTML += restartBtn;
-            }
-        }
-        function restartQuiz() {
-            currentQuestion = 0;
-            score = 0;
-            loadQuestion();
-        }
-        document.getElementById("feedbackForm").addEventListener("submit", function (e) {
-            e.preventDefault();
-            const form = e.target;
-            const status = document.getElementById("formStatus");
-            status.innerHTML = '<div class="spinner-border spinner-border-sm me-2" role="status"></div>Жіберілуде...';
-            setTimeout(() => {
-                status.innerHTML = '<div class="alert alert-success"><i class="fas fa-check-circle me-2"></i>Хабарлама сәтті жіберілді! Жауабыңызға 24 сағат ішінде жауап береміз.</div>';
-                form.reset();
-            }, 1500);
-        });
-        document.addEventListener('DOMContentLoaded', (event) => {
-            fetchWeather();
-            loadQuestion();
-            renderComments();
-        });
-    </script>
+    <script src="script.js" defer></script>
 </body>
 </html>
