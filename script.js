@@ -668,12 +668,33 @@ document.addEventListener('DOMContentLoaded', (event) => {
         themeToggler.querySelector('i').className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
     });
 
+    // Enhanced Photo Gallery Modal Logic
+    const galleryImages = document.querySelectorAll('.gallery-img');
+    const galleryImageSources = Array.from(galleryImages).map(img => img.src);
+    let currentImageIndex = 0;
+
     const galleryModal = new bootstrap.Modal(document.getElementById('galleryModal'));
-    document.querySelectorAll('.gallery-img').forEach(img => {
+    const modalImage = document.getElementById('modalImage');
+    const galleryPrevBtn = document.getElementById('galleryPrevBtn');
+    const galleryNextBtn = document.getElementById('galleryNextBtn');
+
+    function showImageAtIndex(index) {
+        currentImageIndex = index;
+        modalImage.src = galleryImageSources[currentImageIndex];
+    }
+
+    galleryImages.forEach((img, index) => {
         img.addEventListener('click', () => {
-            document.getElementById('modalImage').src = img.src;
+            showImageAtIndex(index);
             galleryModal.show();
         });
+    });
+
+    galleryPrevBtn.addEventListener('click', () => {
+        showImageAtIndex((currentImageIndex - 1 + galleryImageSources.length) % galleryImageSources.length);
+    });
+    galleryNextBtn.addEventListener('click', () => {
+        showImageAtIndex((currentImageIndex + 1) % galleryImageSources.length);
     });
 
     // Phone Auth Modal Logic (Setup once)

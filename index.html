@@ -30,6 +30,33 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/scrollreveal"></script>
+    <style>
+        /* Custom styles for the enhanced photo gallery modal */
+        #modalImage {
+            max-height: 85vh; /* Суреттің биіктігін экранның 85%-ымен шектеу */
+            object-fit: contain; /* Суретті толық көрсету, пропорцияны сақтау */
+            width: 100%;
+        }
+
+        #galleryModal .carousel-control-prev,
+        #galleryModal .carousel-control-next {
+            background-color: rgba(0, 0, 0, 0.4); /* Кез келген суретте көрінетін фон */
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        #galleryModal .carousel-control-prev:hover,
+        #galleryModal .carousel-control-next:hover {
+            background-color: rgba(0, 0, 0, 0.7); /* Батырманы басқанда түсін қоюлату */
+        }
+
+        #galleryModal .carousel-control-prev { left: 1rem; }
+        #galleryModal .carousel-control-next { right: 1rem; }
+    </style>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -219,8 +246,16 @@
     <div class="modal fade" id="galleryModal" tabindex="-1" aria-labelledby="galleryModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content bg-dark">
-                <div class="modal-body text-center p-0">
+                <div class="modal-body text-center p-0 position-relative">
                     <img src="" id="modalImage" class="img-fluid" alt="Gallery Image">
+                    <button class="carousel-control-prev" type="button" id="galleryPrevBtn">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" id="galleryNextBtn">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 </div>
             </div>
         </div>
