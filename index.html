@@ -30,52 +30,92 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/scrollreveal"></script>
+    <!-- 
+        Төмендегі стильдер галереяның көрінісін жақсарту үшін қосылды.
+        Кодты таза ұстау үшін бұл стильдерді style.css файлына көшірген дұрыс.
+    -->
     <style>
-        /* Custom styles for the enhanced photo gallery modal */
-        #modalImage {
-            max-height: 85vh; /* Суреттің биіктігін экранның 85%-ымен шектеу */
-            object-fit: contain; /* Суретті толық көрсету, пропорцияны сақтау */
-            width: 100%;
+        html {
+            scroll-behavior: smooth; /* Бетті біртіндеп жылжыту */
+        }
+        /* Футерге навигация мәзірі сияқты стиль беру */
+        .site-footer {
+            background-color: rgba(var(--primary-bg-color-rgb), 0.95); /* Фонды сәл қоюлау еттік */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--secondary-text-color);
+            /* Футерді көрнекі ету үшін көлеңке қосу */
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .site-footer a {
+            color: var(--bs-primary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .site-footer a:hover {
+            color: var(--bs-light);
+        }
+        /* Галерея карточкасына ерекше рамка */
+        #photogallery .card {
+            border: 2px solid var(--bs-primary-border-subtle);
+            transition: box-shadow 0.3s ease;
+        }
+        #photogallery .card:hover {
+            box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
         }
 
+        /* Модальді терезедегі келесі/алдыңғы батырмаларына көрінетін түс беру */
         #galleryModal .carousel-control-prev,
         #galleryModal .carousel-control-next {
-            background-color: rgba(0, 0, 0, 0.4); /* Кез келген суретте көрінетін фон */
-            width: 3rem;
-            height: 3rem;
-            border-radius: 50%;
-            top: 50%;
-            transform: translateY(-50%);
-            transition: background-color 0.2s ease-in-out;
+            background-color: var(--bs-primary);
+            opacity: 0.8;
+            transition: opacity 0.2s ease-in-out;
         }
-
         #galleryModal .carousel-control-prev:hover,
         #galleryModal .carousel-control-next:hover {
-            background-color: rgba(0, 0, 0, 0.7); /* Батырманы басқанда түсін қоюлату */
+            opacity: 1;
         }
 
-        #galleryModal .carousel-control-prev { left: 1rem; }
-        #galleryModal .carousel-control-next { right: 1rem; }
+        /* 
+          Модальді терезенің өлшемін тұрақты сақтау.
+          Бұл сурет ауысқанда рамканың "секіруін" болдырмайды.
+        */
+        #galleryModal .modal-body {
+            height: 85vh; /* Рамканың биіктігін бекіту */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #modalImage {
+            max-width: 100%;
+            max-height: 100%;
+        }
     </style>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body data-bs-spy="scroll" data-bs-target="#navbarNav" data-bs-offset="100">
+    <!-- Preloader / Жүктеу экраны -->
+    <div id="preloader">
+        <div class="spinner"></div>
+    </div>
+
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
             <a class="navbar-brand me-3" href="#">
                 <i class="fas fa-dumbbell me-2"></i>JIGER
             </a>
             <span id="weather" class="weather-display"></span>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link active" href="#" data-translate="navHome"><i class="fas fa-home me-1"></i> Басты бет</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#home" data-translate="navHome"><i class="fas fa-home me-1"></i> Басты бет</a></li>
                     <li class="nav-item"><a class="nav-link" href="#services" data-translate="navServices"><i class="fas fa-list me-1"></i> Қызметтер</a></li>
                     <li class="nav-item"><a class="nav-link" href="#photogallery" data-translate="navGallery"><i class="fas fa-images me-1"></i> Фотогалерея</a></li>
                     <li class="nav-item"><a class="nav-link" href="#quiz" data-translate="navQuiz"><i class="fas fa-question-circle me-1"></i> Тест</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#feedback" data-translate="navContact"><i class="fas fa-envelope me-1"></i> Байланыс</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#guestbook" data-translate="navContact"><i class="fas fa-comments me-1"></i> Пікірлер</a></li>
                     <li class="nav-item ms-lg-2">
                         <a class="nav-link" href="#" id="theme-toggler" data-translate-title="themeTogglerTitle" title="Түн/Күн режимі">
                             <i class="fas fa-sun"></i>
@@ -86,15 +126,15 @@
                     <!-- Auth state will be rendered here by JS -->
                 </div>
                 <div class="language-switcher d-flex ms-lg-2 mt-2 mt-lg-0">
-                    <button class="btn btn-sm" data-lang="kk">KZ</button>
-                    <button class="btn btn-sm" data-lang="ru">RU</button>
-                    <button class="btn btn-sm" data-lang="en">EN</button>
+                    <button type="button" class="btn btn-sm" data-lang="kk" aria-label="Қазақша">KZ</button>
+                    <button type="button" class="btn btn-sm" data-lang="ru" aria-label="Русский">RU</button>
+                    <button type="button" class="btn btn-sm" data-lang="en" aria-label="English">EN</button>
                 </div>
             </div>
         </div>
     </nav>
 
-    <header class="site-header">
+    <header class="site-header" id="home">
         <div class="container">
             <div class="header-content">
                 <h1 data-translate="headerTitle">«JIGER» Спорт Кешені</h1>
@@ -154,7 +194,7 @@
                     <div id="question" class="mb-3 fw-bold h5"></div>
                     <div id="answers" class="mb-3 d-flex flex-wrap gap-2"></div>
                     <div class="d-flex justify-content-between align-items-center">
-                        <button id="nextQuestionBtn" class="btn btn-success" data-translate="quizNextBtn"><i class="fas fa-forward me-1"></i>Келесі сұрақ</button>
+                        <button type="button" id="nextQuestionBtn" class="btn btn-success" data-translate="quizNextBtn"><i class="fas fa-forward me-1"></i>Келесі сұрақ</button>
                         <div class="d-flex align-items-center gap-3">
                             <div id="timer-container" class="d-flex align-items-center gap-1">
                                 <i class="fas fa-clock text-info"></i>
@@ -188,18 +228,18 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-lg-3 col-md-4 col-6 mb-4"><img src="jiger.jpeg" class="img-fluid img-thumbnail gallery-img" alt="Jiger Logo"></div>
-                        <div class="col-lg-3 col-md-4 col-6 mb-4"><img src="images/Amirkhan.jpg" class="img-fluid img-thumbnail gallery-img" alt="Amirkhan"></div>
-                        <div class="col-lg-3 col-md-4 col-6 mb-4"><img src="images/atrium.jpg" class="img-fluid img-thumbnail gallery-img" alt="atrium"></div>
-                        <div class="col-lg-3 col-md-4 col-6 mb-4"><img src="images/Kulager.jpg" class="img-fluid img-thumbnail gallery-img" alt="Kulager"></div>
-                        <div class="col-lg-3 col-md-4 col-6 mb-4"><img src="images/Lokomativ atr.jpg" class="img-fluid img-thumbnail gallery-img" alt="Lokomativ atr"></div>
-                        <div class="col-lg-3 col-md-4 col-6 mb-4"><img src="images/Madeniet Oral.jpg" class="img-fluid img-thumbnail gallery-img" alt="Madeniet Oral"></div>
-                        <div class="col-lg-3 col-md-4 col-6 mb-4"><img src="images/mako.jpg" class="img-fluid img-thumbnail gallery-img" alt="mako"></div>
-                        <div class="col-lg-3 col-md-4 col-6 mb-4"><img src="images/medina.jpg" class="img-fluid img-thumbnail gallery-img" alt="medina"></div>
-                        <div class="col-lg-3 col-md-4 col-6 mb-4"><img src="images/MFC DOSSOR.jpg" class="img-fluid img-thumbnail gallery-img" alt="MFC DOSSOR"></div>
-                        <div class="col-lg-3 col-md-4 col-6 mb-4"><img src="images/MFC Kit KRAI.jpg" class="img-fluid img-thumbnail gallery-img" alt="MFC Kit KRAI"></div>
-                        <div class="col-lg-3 col-md-4 col-6 mb-4"><img src="images/TEMYRLAN.jpeg" class="img-fluid img-thumbnail gallery-img" alt="TEMYRLAN"></div>
-                        <div class="col-lg-3 col-md-4 col-6 mb-4"><img src="images/Zhiger Mynai Servis.jpg" class="img-fluid img-thumbnail gallery-img" alt="Zhiger Mynai Servis"></div>
+                        <div class="col-lg-3 col-md-4 col-6 mb-4"><img src="jiger.jpeg" class="img-fluid img-thumbnail gallery-img" alt="Jiger Logo" loading="lazy"></div>
+                        <div class="col-lg-3 col-md-4 col-6 mb-4"><img src="images/Amirkhan.jpg" class="img-fluid img-thumbnail gallery-img" alt="Amirkhan" loading="lazy"></div>
+                        <div class="col-lg-3 col-md-4 col-6 mb-4"><img src="images/atrium.jpg" class="img-fluid img-thumbnail gallery-img" alt="atrium" loading="lazy"></div>
+                        <div class="col-lg-3 col-md-4 col-6 mb-4"><img src="images/Kulager.jpg" class="img-fluid img-thumbnail gallery-img" alt="Kulager" loading="lazy"></div>
+                        <div class="col-lg-3 col-md-4 col-6 mb-4"><img src="images/Lokomativ atr.jpg" class="img-fluid img-thumbnail gallery-img" alt="Lokomativ atr" loading="lazy"></div>
+                        <div class="col-lg-3 col-md-4 col-6 mb-4"><img src="images/Madeniet Oral.jpg" class="img-fluid img-thumbnail gallery-img" alt="Madeniet Oral" loading="lazy"></div>
+                        <div class="col-lg-3 col-md-4 col-6 mb-4"><img src="images/mako.jpg" class="img-fluid img-thumbnail gallery-img" alt="mako" loading="lazy"></div>
+                        <div class="col-lg-3 col-md-4 col-6 mb-4"><img src="images/medina.jpg" class="img-fluid img-thumbnail gallery-img" alt="medina" loading="lazy"></div>
+                        <div class="col-lg-3 col-md-4 col-6 mb-4"><img src="images/MFC DOSSOR.jpg" class="img-fluid img-thumbnail gallery-img" alt="MFC DOSSOR" loading="lazy"></div>
+                        <div class="col-lg-3 col-md-4 col-6 mb-4"><img src="images/MFC Kit KRAI.jpg" class="img-fluid img-thumbnail gallery-img" alt="MFC Kit KRAI" loading="lazy"></div>
+                        <div class="col-lg-3 col-md-4 col-6 mb-4"><img src="images/TEMYRLAN.jpeg" class="img-fluid img-thumbnail gallery-img" alt="TEMYRLAN" loading="lazy"></div>
+                        <div class="col-lg-3 col-md-4 col-6 mb-4"><img src="images/Zhiger Mynai Servis.jpg" class="img-fluid img-thumbnail gallery-img" alt="Zhiger Mynai Servis" loading="lazy"></div>
                     </div>
                 </div>
             </div>
@@ -223,20 +263,38 @@
         </section>
     </main>
 
-    <footer class="site-footer">
+    <footer class="site-footer pt-5 pb-4">
         <div class="container">
-            <h3 data-translate="footerContactUs">Бізбен байланысыңыз</h3>
-            <ul class="social-links list-inline">
-                <li class="list-inline-item"><a href="https://www.youtube.com/@jigersportkesheni7284/streams" target="_blank" rel="noopener noreferrer" aria-label="JIGER on YouTube"><i class="fab fa-youtube"></i></a></li>
-                <li class="list-inline-item"><a href="https://www.instagram.com/jiger_sport_kesheni/" target="_blank" rel="noopener noreferrer" aria-label="JIGER on Instagram"><i class="fab fa-instagram"></i></a></li>
-                <li class="list-inline-item"><a href="#" target="_blank" rel="noopener noreferrer" aria-label="JIGER on Facebook"><i class="fab fa-facebook"></i></a></li>
-                <li class="list-inline-item"><a href="https://t.me/+77780574552" target="_blank" rel="noopener noreferrer" aria-label="JIGER on Telegram"><i class="fab fa-telegram"></i></a></li>
-                <li class="list-inline-item"><a href="https://wa.me/77780574552" target="_blank" rel="noopener noreferrer" aria-label="JIGER on WhatsApp"><i class="fab fa-whatsapp"></i></a></li>
-            </ul>
-            <div class="footer-info">
-                <p><a href="https://2gis.kz/atyrau/geo/70000001090340937" target="_blank" rel="noopener noreferrer" data-translate="footerAddress"><i class="fas fa-map-marker-alt me-2"></i>Қазақстан, Құлсары қаласы</a></p>
-                <p data-translate="footerPhone"><i class="fas fa-phone me-2"></i>+7 (778) 057 45 52</p>
-                <p data-translate="footerEmail"><a href="mailto:jigersport@mail.ru"><i class="fas fa-envelope me-2"></i>jigersport@mail.ru</a></p>
+            <div class="row">
+                <div class="col-lg-5 col-md-6 mb-4 mb-md-0">
+                    <h3 data-translate="footerContactUs">Бізбен байланысыңыз</h3>
+                    <div class="footer-info">
+                        <p><a href="https://2gis.kz/atyrau/geo/70000001090340937" target="_blank" rel="noopener noreferrer" data-translate="footerAddress"><i class="fas fa-map-marker-alt me-2"></i>Қазақстан, Құлсары қаласы</a></p>
+                        <p data-translate="footerPhone"><i class="fas fa-phone me-2"></i>+7 (778) 057 45 52</p>
+                        <p><a href="mailto:jigersport@mail.ru" data-translate="footerEmail"><i class="fas fa-envelope me-2"></i>jigersport@mail.ru</a></p>
+                    </div>
+                    <ul class="social-links list-inline mt-3">
+                        <li class="list-inline-item"><a href="https://www.youtube.com/@jigersportkesheni7284/streams" target="_blank" rel="noopener noreferrer" aria-label="JIGER on YouTube"><i class="fab fa-youtube"></i></a></li>
+                        <li class="list-inline-item"><a href="https://www.instagram.com/jiger_sport_kesheni/" target="_blank" rel="noopener noreferrer" aria-label="JIGER on Instagram"><i class="fab fa-instagram"></i></a></li>
+                        <li class="list-inline-item"><a href="#" target="_blank" rel="noopener noreferrer" aria-label="JIGER on Facebook"><i class="fab fa-facebook"></i></a></li>
+                        <li class="list-inline-item"><a href="https://t.me/+77780574552" target="_blank" rel="noopener noreferrer" aria-label="JIGER on Telegram"><i class="fab fa-telegram"></i></a></li>
+                        <li class="list-inline-item"><a href="https://wa.me/77780574552" target="_blank" rel="noopener noreferrer" aria-label="JIGER on WhatsApp"><i class="fab fa-whatsapp"></i></a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-7 col-md-6">
+                    <div class="ratio ratio-16x9">
+                        <iframe 
+                            src="https://widgets.2gis.com/widget?type=firmsonmap&options={%22pos%22:{%22lat%22:46.97496,%22lon%22:53.303979,%22zoom%22:16},%22opt%22:{%22city%22:%22atyrau%22},%22org%22:%2270000001090340937%22}" 
+                            style="border-radius: 8px; border: 0;" 
+                            allowfullscreen="" 
+                            loading="lazy"
+                            title="JIGER орналасқан жері">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+            <hr class="mt-4 mb-3">
+            <div class="text-center footer-copyright">
                 <p data-translate="footerCopyright">&copy; 2025 «JIGER» Спорт Кешені. Барлық құқықтар қорғалған.</p>
             </div>
         </div>
@@ -248,14 +306,15 @@
             <div class="modal-content bg-dark">
                 <div class="modal-body text-center p-0 position-relative">
                     <img src="" id="modalImage" class="img-fluid" alt="Gallery Image">
-                    <button class="carousel-control-prev" type="button" id="galleryPrevBtn">
+                    <button class="carousel-control-prev" type="button" id="galleryPrevBtn" aria-label="Previous image">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
-                    <button class="carousel-control-next" type="button" id="galleryNextBtn">
+                    <button class="carousel-control-next" type="button" id="galleryNextBtn" aria-label="Next image">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                     </button>
+                    <div id="galleryCounter"></div>
                 </div>
             </div>
         </div>
@@ -267,7 +326,7 @@
             <div class="modal-content" style="background-color: var(--secondary-bg-color); color: var(--primary-text-color);">
                 <div class="modal-header">
                     <h5 class="modal-title" id="phoneAuthModalLabel" data-translate="phoneAuthTitle">Телефон арқылы кіру</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Жабу"></button>
                 </div>
                 <div class="modal-body">
                     <div id="phone-input-view">
@@ -275,14 +334,14 @@
                             <label for="phone-number" class="form-label" data-translate="phoneNumberLabel">Телефон нөмірі</label>
                             <input type="tel" class="form-control" id="phone-number" placeholder="+7 (700) 123-45-67">
                         </div>
-                        <button id="send-code-btn" class="btn btn-primary w-100" data-translate="sendCodeBtn">Код жіберу</button>
+                        <button type="button" id="send-code-btn" class="btn btn-primary w-100" data-translate="sendCodeBtn">Код жіберу</button>
                     </div>
                     <div id="code-input-view" class="d-none">
                         <div class="mb-3">
                             <label for="verification-code" class="form-label" data-translate="verificationCodeLabel">Растау коды</label>
                             <input type="text" class="form-control" id="verification-code" placeholder="123456">
                         </div>
-                        <button id="verify-code-btn" class="btn btn-success w-100" data-translate="verifyCodeBtn">Растау</button>
+                        <button type="button" id="verify-code-btn" class="btn btn-success w-100" data-translate="verifyCodeBtn">Растау</button>
                     </div>
                     <div id="recaptcha-container" class="mt-3"></div>
                     <p id="phone-auth-error" class="text-danger mt-2"></p>

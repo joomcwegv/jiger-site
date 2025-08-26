@@ -72,7 +72,10 @@ const translations = {
         quizResultBad: (score, total) => `<span class="text-warning"><i class="fas fa-lightbulb me-2"></i>Спорт туралы көбірек біліп, қайта келіңіз! Нәтижеңіз: ${score}/${total}</span>`,
         quizRestartBtn: '<i class="fas fa-redo me-1"></i>Тестті қайта бастау',
         quizTimerTitle: "Сұраққа жауап беру уақыты",
+        googleSignInError: "Google арқылы кіру кезінде қате пайда болды. Кейінірек қайталап көріңіз немесе Firebase баптауларын тексеріңіз.",
         invalidPhoneNumber: "Телефон нөмірінің форматы қате. Оны +7... үлгісінде енгізіңіз.",
+        captchaCheckFailed: "reCAPTCHA тексеруі сәтсіз аяқталды. Сайт домені Firebase-те рұқсат етілгеніне көз жеткізіңіз.",
+        authErrorGeneric: "Тіркелу кезінде белгісіз қате пайда болды. Google Cloud жобаңызда 'Identity Platform' API қосылғанын тексеріңіз.",
         weather: { "clear sky": "ашық", "few clouds": "аздап бұлтты", "scattered clouds": "бұлтты", "broken clouds": "бұлтты", "overcast clouds": "бұлтты", "shower rain": "нөсерлі жаңбыр", "rain": "жаңбыр", "light rain": "жеңіл жаңбыр", "moderate rain": "қалыпты жаңбыр", "heavy intensity rain": "қатты жаңбыр", "thunderstorm": "найзағай", "snow": "қар", "mist": "тұман" },
         quiz: [
             { question: "🏃 Алғашқы заманауи Олимпиада ойындары қай жылы өткізілді?", options: ["1900", "1896", "1912", "1924"], answer: "1896" },
@@ -165,7 +168,10 @@ const translations = {
         quizResultBad: (score, total) => `<span class="text-warning"><i class="fas fa-lightbulb me-2"></i>Узнайте больше о спорте и возвращайтесь! Ваш результат: ${score}/${total}</span>`,
         quizRestartBtn: '<i class="fas fa-redo me-1"></i>Начать тест заново',
         quizTimerTitle: "Время на ответ",
+        googleSignInError: "Произошла ошибка при входе через Google. Пожалуйста, попробуйте позже или проверьте настройки Firebase.",
         invalidPhoneNumber: "Неверный формат номера телефона. Введите в формате +7...",
+        captchaCheckFailed: "Проверка reCAPTCHA не удалась. Убедитесь, что домен сайта авторизован в Firebase.",
+        authErrorGeneric: "Произошла неизвестная ошибка аутентификации. Убедитесь, что API 'Identity Platform' включен в вашем проекте Google Cloud.",
         weather: { "clear sky": "ясно", "few clouds": "малооблачно", "scattered clouds": "переменная облачность", "broken clouds": "облачно с прояснениями", "overcast clouds": "пасмурно", "shower rain": "ливень", "rain": "дождь", "light rain": "небольшой дождь", "moderate rain": "умеренный дождь", "heavy intensity rain": "сильный дождь", "thunderstorm": "гроза", "snow": "снег", "mist": "туман" },
         quiz: [
             { question: "🏃 В каком году были проведены первые современные Олимпийские игры?", options: ["1900", "1896", "1912", "1924"], answer: "1896" },
@@ -259,7 +265,10 @@ const translations = {
         quizResultBad: (score, total) => `<span class="text-warning"><i class="fas fa-lightbulb me-2"></i>Learn more about sports and come back! Your result: ${score}/${total}</span>`,
         quizRestartBtn: '<i class="fas fa-redo me-1"></i>Restart Quiz',
         quizTimerTitle: "Time to answer",
+        googleSignInError: "An error occurred during Google Sign-In. Please try again later or check your Firebase settings.",
         invalidPhoneNumber: "Invalid phone number format. Please enter in +... format.",
+        captchaCheckFailed: "reCAPTCHA check failed. Make sure the site domain is authorized in Firebase.",
+        authErrorGeneric: "An unknown authentication error occurred. Please ensure the 'Identity Platform' API is enabled in your Google Cloud project.",
         weather: { "clear sky": "clear sky", "few clouds": "few clouds", "scattered clouds": "scattered clouds", "broken clouds": "broken clouds", "overcast clouds": "overcast clouds", "shower rain": "shower rain", "rain": "rain", "light rain": "light rain", "moderate rain": "moderate rain", "heavy intensity rain": "heavy intensity rain", "thunderstorm": "thunderstorm", "snow": "snow", "mist": "mist" },
         quiz: [
             { question: "🏃 In what year were the first modern Olympic Games held?", options: ["1900", "1896", "1912", "1924"], answer: "1896" },
@@ -293,7 +302,7 @@ const translations = {
 // -- Firebase Configuration --
 // МАҢЫЗДЫ: Бұл конфигурацияны Firebase консолінен алған өз деректеріңізбен толтырыңыз.
 const firebaseConfig = {
-  apiKey: "AIzaSyAjdgUfRQmRJSXiCWqf8I6tnz_mzWhFNcw", // Firebase-тен алған кілтіңіз
+  apiKey: "AIzaSyA4Oi6s_piP9y5WMIfeVaJME9Zw4KcujcM", // 1-қадамда Google Cloud Console-дан көшіріп алған жаңа кілт
   authDomain: "jiger-site.firebaseapp.com",
   projectId: "jiger-site",
   storageBucket: "jiger-site.firebasestorage.app",
@@ -311,8 +320,11 @@ try {
     console.error("Firebase initialization error:", e);
 }
 
-const apiKey = "a1ec03a2e6f789a2df13796ff0ee07fc";
-const city = "Kulsary";
+// -- Weather API Configuration --
+const WEATHER_API_KEY = "a1ec03a2e6f789a2df13796ff0ee07fc"; // OpenWeatherMap API key
+const WEATHER_CITY = "Kulsary"; // City for the weather forecast
+
+
 async function fetchWeather() {
     const weatherIcons = {
         "Clear": "fa-sun",
@@ -329,7 +341,7 @@ async function fetchWeather() {
     const weatherColors = { "Clear": "#FFD700", "Clouds": "#B0C4DE", "Rain": "#4682B4", "Snow": "#FFFFFF", "Thunderstorm": "#9400D3" };
 
     const lang = currentLang === 'kk' ? 'kz' : currentLang;
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&lang=${lang}`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${WEATHER_CITY}&appid=${WEATHER_API_KEY}&units=metric&lang=${lang}`;
     const weatherElement = document.getElementById("weather");
     try {
         const response = await fetch(url);
@@ -368,6 +380,7 @@ function loadQuestion() {
     q.options.forEach(option => {
         const button = document.createElement('button');
         button.textContent = option;
+        button.type = 'button';
         button.className = 'btn btn-outline-primary flex-grow-1';
         button.onclick = () => selectAnswer(button, q.answer);
         answersDiv.appendChild(button);
@@ -579,62 +592,71 @@ function listenForComments() {
       });
 }
 
-function handleAuthStateChanged(user) {
+function renderSignedInView(user) {
     const authContainer = document.getElementById('auth-container');
     const usernameInput = document.getElementById('username');
 
-    if (user) {
-        // User is signed in
-        const avatar = user.photoURL ? `<img src="${user.photoURL}" alt="avatar" class="rounded-circle me-2 navbar-avatar">` : '';
-        const welcomeName = user.displayName ? user.displayName.split(' ')[0] : user.phoneNumber;
-        authContainer.innerHTML = `
-            ${avatar}
-            <button id="signOutBtn" class="btn btn-sm btn-outline-danger" title="${translations[currentLang].signOutTitle(welcomeName)}"><i class="fas fa-sign-out-alt me-lg-1"></i><span class="d-none d-lg-inline">${translations[currentLang].signOut}</span></button>
-        `;
-        document.getElementById('signOutBtn').addEventListener('click', () => auth.signOut());
+    const avatar = user.photoURL ? `<img src="${user.photoURL}" alt="avatar" class="rounded-circle me-2 navbar-avatar">` : '';
+    const welcomeName = user.displayName ? user.displayName.split(' ')[0] : user.phoneNumber;
+    authContainer.innerHTML = `
+        ${avatar}
+        <button type="button" id="signOutBtn" class="btn btn-sm btn-outline-danger" title="${translations[currentLang].signOutTitle(welcomeName)}"><i class="fas fa-sign-out-alt me-lg-1"></i><span class="d-none d-lg-inline">${translations[currentLang].signOut}</span></button>
+    `;
+    document.getElementById('signOutBtn').addEventListener('click', () => auth.signOut());
 
-        if (usernameInput) {
-            if (user.displayName) {
-                usernameInput.value = user.displayName;
-                usernameInput.readOnly = true;
-            } else {
-                usernameInput.value = ''; // Allow phone users to enter their name
-                usernameInput.readOnly = false;
-            }
-        }
-
-    } else {
-        // User is signed out
-        authContainer.innerHTML = `
-            <div class="btn-group" role="group">
-                <button id="googleSignInBtn" class="btn btn-sm btn-outline-danger" title="${translations[currentLang].signInWithGoogle.replace(/<[^>]*>?/gm, '')}">
-                    ${translations[currentLang].signInWithGoogle}
-                </button>
-                <button id="phoneSignInBtn" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#phoneAuthModal">
-                    ${translations[currentLang].signInWithPhone}
-                </button>
-            </div>
-        `;
-        const googleBtn = document.getElementById('googleSignInBtn');
-        const phoneBtn = document.getElementById('phoneSignInBtn');
-
-        googleBtn.addEventListener('click', () => {
-            googleBtn.classList.add('active'); // Highlight button on click
-            if (phoneBtn) phoneBtn.classList.remove('active'); // Ensure other button is not active
-            const provider = new firebase.auth.GoogleAuthProvider();
-            auth.signInWithPopup(provider).catch(error => {
-                console.error("Sign-in error", error);
-            }).finally(() => {
-                googleBtn.classList.remove('active'); // Remove highlight after popup closes
-            });
-        });
-
-        if (usernameInput) {
-            if (usernameInput.readOnly) {
-                usernameInput.value = ''; // Clear the name if they log out
-            }
+    if (usernameInput) {
+        if (user.displayName) {
+            usernameInput.value = user.displayName;
+            usernameInput.readOnly = true;
+        } else {
+            usernameInput.value = ''; // Allow phone users to enter their name
             usernameInput.readOnly = false;
         }
+    }
+}
+
+function renderSignedOutView() {
+    const authContainer = document.getElementById('auth-container');
+    const usernameInput = document.getElementById('username');
+
+    authContainer.innerHTML = `
+        <div class="btn-group" role="group">
+            <button type="button" id="googleSignInBtn" class="btn btn-sm btn-outline-danger" title="${translations[currentLang].signInWithGoogle.replace(/<[^>]*>?/gm, '')}">
+                ${translations[currentLang].signInWithGoogle}
+            </button>
+            <button type="button" id="phoneSignInBtn" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#phoneAuthModal">
+                ${translations[currentLang].signInWithPhone}
+            </button>
+        </div>
+    `;
+    const googleBtn = document.getElementById('googleSignInBtn');
+    const phoneBtn = document.getElementById('phoneSignInBtn');
+
+    googleBtn.addEventListener('click', () => {
+        googleBtn.classList.add('active');
+        if (phoneBtn) phoneBtn.classList.remove('active');
+        const provider = new firebase.auth.GoogleAuthProvider();
+        auth.signInWithPopup(provider).catch(error => {
+            console.error("Google Sign-in error:", error);
+            alert(translations[currentLang].googleSignInError || "An error occurred during Google Sign-In.");
+        }).finally(() => {
+            googleBtn.classList.remove('active');
+        });
+    });
+
+    if (usernameInput) {
+        if (usernameInput.readOnly) {
+            usernameInput.value = ''; // Clear the name if they log out
+        }
+        usernameInput.readOnly = false;
+    }
+}
+
+function handleAuthStateChanged(user) {
+    if (user) {
+        renderSignedInView(user);
+    } else {
+        renderSignedOutView();
     }
 }
 
@@ -642,7 +664,17 @@ function handleAuthStateChanged(user) {
 // INITIALIZATION
 // =================================================================================
 
-document.addEventListener('DOMContentLoaded', (event) => {
+function setupPreloader() {
+    const preloader = document.getElementById('preloader');
+    if (!preloader) return;
+
+    // Hide preloader when all content (including images) is loaded
+    window.addEventListener('load', () => {
+        preloader.classList.add('preloader-hidden');
+    });
+}
+
+function setupEventListeners() {
     document.getElementById('nextQuestionBtn').addEventListener('click', nextQuestion);
 
     document.querySelectorAll('.language-switcher button').forEach(button => {
@@ -650,7 +682,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
             setLanguage(e.target.dataset.lang);
         });
     });
+}
 
+function setupTheme() {
     const themeToggler = document.getElementById('theme-toggler');
     const currentTheme = localStorage.getItem('jigerTheme') || 'dark';
     document.body.classList.add(currentTheme + '-theme');
@@ -667,9 +701,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
         localStorage.setItem('jigerTheme', theme);
         themeToggler.querySelector('i').className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
     });
+}
 
-    // Enhanced Photo Gallery Modal Logic
+function setupGallery() {
     const galleryImages = document.querySelectorAll('.gallery-img');
+    if (galleryImages.length === 0) return;
+
     const galleryImageSources = Array.from(galleryImages).map(img => img.src);
     let currentImageIndex = 0;
 
@@ -677,10 +714,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const modalImage = document.getElementById('modalImage');
     const galleryPrevBtn = document.getElementById('galleryPrevBtn');
     const galleryNextBtn = document.getElementById('galleryNextBtn');
+    const galleryCounter = document.getElementById('galleryCounter');
 
     function showImageAtIndex(index) {
         currentImageIndex = index;
         modalImage.src = galleryImageSources[currentImageIndex];
+        galleryCounter.textContent = `${currentImageIndex + 1} / ${galleryImageSources.length}`;
     }
 
     galleryImages.forEach((img, index) => {
@@ -696,102 +735,113 @@ document.addEventListener('DOMContentLoaded', (event) => {
     galleryNextBtn.addEventListener('click', () => {
         showImageAtIndex((currentImageIndex + 1) % galleryImageSources.length);
     });
+}
 
-    // Phone Auth Modal Logic (Setup once)
+function setupPhoneAuth() {
     const phoneAuthModalEl = document.getElementById('phoneAuthModal');
-    if (phoneAuthModalEl && typeof bootstrap !== 'undefined' && typeof firebase !== 'undefined') {
-        const phoneAuthModal = new bootstrap.Modal(phoneAuthModalEl);
-        const sendCodeBtn = document.getElementById('send-code-btn');
-        const verifyCodeBtn = document.getElementById('verify-code-btn');
-        const phoneInputView = document.getElementById('phone-input-view');
-        const codeInputView = document.getElementById('code-input-view');
-        const phoneNumberInput = document.getElementById('phone-number');
-        const verificationCodeInput = document.getElementById('verification-code');
-        const errorElement = document.getElementById('phone-auth-error');
-
-        // Add event listeners for modal show/hide to toggle active state on buttons
-        phoneAuthModalEl.addEventListener('show.bs.modal', () => {
-            const phoneBtn = document.getElementById('phoneSignInBtn');
-            const googleBtn = document.getElementById('googleSignInBtn');
-            if (phoneBtn) phoneBtn.classList.add('active');
-            if (googleBtn) googleBtn.classList.remove('active'); // Ensure other button is not active
-        });
-
-        // Reset modal state when it's hidden
-        phoneAuthModalEl.addEventListener('hidden.bs.modal', () => {
-            const phoneBtn = document.getElementById('phoneSignInBtn');
-            if (phoneBtn) phoneBtn.classList.remove('active');
-            phoneInputView.classList.remove('d-none');
-            codeInputView.classList.add('d-none');
-            phoneNumberInput.value = '';
-            verificationCodeInput.value = '';
-            errorElement.textContent = '';
-        });
-
-        if (auth) {
-            window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
-                'size': 'invisible'
-            });
-
-            sendCodeBtn.onclick = () => {
-                const phoneNumberRaw = phoneNumberInput.value.trim();
-                const appVerifier = window.recaptchaVerifier;
-
-                // Convert number to E.164 format for Firebase
-                let phoneNumber = phoneNumberRaw.replace(/\D/g, ''); // Get only digits
-
-                // If number starts with 8 (common local format for KZ), replace with 7
-                if (phoneNumber.startsWith('8') && phoneNumber.length === 11) {
-                    phoneNumber = '7' + phoneNumber.substring(1);
-                }
-                const formattedPhoneNumber = '+' + phoneNumber;
-
-                auth.signInWithPhoneNumber(formattedPhoneNumber, appVerifier)
-                    .then((confirmationResult) => {
-                        window.confirmationResult = confirmationResult;
-                        phoneInputView.classList.add('d-none');
-                        codeInputView.classList.remove('d-none');
-                        errorElement.textContent = '';
-                    }).catch((error) => {
-                        console.error("SMS not sent", error);
-                        // Provide a more user-friendly error for invalid format
-                        errorElement.textContent = (error.code === 'auth/invalid-phone-number')
-                            ? (translations[currentLang].invalidPhoneNumber || 'Invalid phone number format.')
-                            : error.message;
-                        recaptchaVerifier.render().then(widgetId => {
-                            if (widgetId !== undefined) {
-                                recaptchaVerifier.reset(widgetId);
-                            }
-                        });
-                    });
-            };
-
-            verifyCodeBtn.onclick = () => {
-                const code = verificationCodeInput.value;
-                if (window.confirmationResult) {
-                    window.confirmationResult.confirm(code).then((result) => {
-                        phoneAuthModal.hide();
-                    }).catch((error) => {
-                        console.error("Code verification failed", error);
-                        errorElement.textContent = error.message;
-                    });
-                }
-            };
-        }
+    if (!phoneAuthModalEl || typeof bootstrap === 'undefined' || typeof firebase === 'undefined' || !auth) {
+        return;
     }
 
+    const phoneAuthModal = new bootstrap.Modal(phoneAuthModalEl);
+    const sendCodeBtn = document.getElementById('send-code-btn');
+    const verifyCodeBtn = document.getElementById('verify-code-btn');
+    const phoneInputView = document.getElementById('phone-input-view');
+    const codeInputView = document.getElementById('code-input-view');
+    const phoneNumberInput = document.getElementById('phone-number');
+    const verificationCodeInput = document.getElementById('verification-code');
+    const errorElement = document.getElementById('phone-auth-error');
+
+    phoneAuthModalEl.addEventListener('show.bs.modal', () => {
+        const phoneBtn = document.getElementById('phoneSignInBtn');
+        const googleBtn = document.getElementById('googleSignInBtn');
+        if (phoneBtn) phoneBtn.classList.add('active');
+        if (googleBtn) googleBtn.classList.remove('active');
+    });
+
+    phoneAuthModalEl.addEventListener('hidden.bs.modal', () => {
+        const phoneBtn = document.getElementById('phoneSignInBtn');
+        if (phoneBtn) phoneBtn.classList.remove('active');
+        phoneInputView.classList.remove('d-none');
+        codeInputView.classList.add('d-none');
+        phoneNumberInput.value = '';
+        verificationCodeInput.value = '';
+        errorElement.textContent = '';
+    });
+
+    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+        'size': 'invisible'
+    });
+
+    sendCodeBtn.onclick = () => {
+        const phoneNumberRaw = phoneNumberInput.value.trim();
+        const appVerifier = window.recaptchaVerifier;
+
+        let phoneNumber = phoneNumberRaw.replace(/\D/g, '');
+        if (phoneNumber.startsWith('8') && phoneNumber.length === 11) {
+            phoneNumber = '7' + phoneNumber.substring(1);
+        }
+        const formattedPhoneNumber = '+' + phoneNumber;
+
+        auth.signInWithPhoneNumber(formattedPhoneNumber, appVerifier)
+            .then((confirmationResult) => {
+                window.confirmationResult = confirmationResult;
+                phoneInputView.classList.add('d-none');
+                codeInputView.classList.remove('d-none');
+                errorElement.textContent = '';
+            }).catch((error) => {
+                console.error("SMS not sent error:", error);
+                let errorMessage = error.message;
+                if (error.code === 'auth/invalid-phone-number') {
+                    errorMessage = translations[currentLang].invalidPhoneNumber || 'Invalid phone number format.';
+                } else if (error.code === 'auth/captcha-check-failed') {
+                    errorMessage = translations[currentLang].captchaCheckFailed || 'reCAPTCHA check failed. Check authorized domains.';
+                } else {
+                    errorMessage = translations[currentLang].authErrorGeneric || 'An unknown authentication error occurred. Please check your project configuration.';
+                }
+                errorElement.textContent = errorMessage;
+                recaptchaVerifier.render().then(widgetId => {
+                    if (widgetId !== undefined) {
+                        recaptchaVerifier.reset(widgetId);
+                    }
+                });
+            });
+    };
+
+    verifyCodeBtn.onclick = () => {
+        const code = verificationCodeInput.value;
+        if (window.confirmationResult) {
+            window.confirmationResult.confirm(code).then((result) => {
+                phoneAuthModal.hide();
+            }).catch((error) => {
+                console.error("Code verification failed", error);
+                errorElement.textContent = error.message;
+            });
+        }
+    };
+}
+
+function initializeScrollReveal() {
+    ScrollReveal().reveal('.site-header, .card, h3', {
+        origin: 'bottom',
+        distance: '50px',
+        duration: 800,
+        interval: 150,
+        reset: false,
+        scale: 0.9
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    setupPreloader();
+    setupEventListeners();
+    setupTheme();
+    setupGallery();
+    setupPhoneAuth();
+    initializeScrollReveal();
+    
     const savedLang = localStorage.getItem('jigerLang') || 'kk';
     setLanguage(savedLang);
     if (auth) auth.onAuthStateChanged(handleAuthStateChanged);
     listenForComments();
-});
-
-// ScrollReveal Animations
-ScrollReveal().reveal('.site-header, .card, h3', {
-    origin: 'bottom',
-    distance: '50px',
-    duration: 800,
-    interval: 150,
-    reset: false,
-    scale: 0.9
 });
