@@ -72,6 +72,7 @@ const translations = {
         quizResultBad: (score, total) => `<span class="text-warning"><i class="fas fa-lightbulb me-2"></i>Спорт туралы көбірек біліп, қайта келіңіз! Нәтижеңіз: ${score}/${total}</span>`,
         quizRestartBtn: '<i class="fas fa-redo me-1"></i>Тестті қайта бастау',
         quizTimerTitle: "Сұраққа жауап беру уақыты",
+        invalidPhoneNumber: "Телефон нөмірінің форматы қате. Оны +7... үлгісінде енгізіңіз.",
         weather: { "clear sky": "ашық", "few clouds": "аздап бұлтты", "scattered clouds": "бұлтты", "broken clouds": "бұлтты", "overcast clouds": "бұлтты", "shower rain": "нөсерлі жаңбыр", "rain": "жаңбыр", "light rain": "жеңіл жаңбыр", "moderate rain": "қалыпты жаңбыр", "heavy intensity rain": "қатты жаңбыр", "thunderstorm": "найзағай", "snow": "қар", "mist": "тұман" },
         quiz: [
             { question: "🏃 Алғашқы заманауи Олимпиада ойындары қай жылы өткізілді?", options: ["1900", "1896", "1912", "1924"], answer: "1896" },
@@ -164,6 +165,7 @@ const translations = {
         quizResultBad: (score, total) => `<span class="text-warning"><i class="fas fa-lightbulb me-2"></i>Узнайте больше о спорте и возвращайтесь! Ваш результат: ${score}/${total}</span>`,
         quizRestartBtn: '<i class="fas fa-redo me-1"></i>Начать тест заново',
         quizTimerTitle: "Время на ответ",
+        invalidPhoneNumber: "Неверный формат номера телефона. Введите в формате +7...",
         weather: { "clear sky": "ясно", "few clouds": "малооблачно", "scattered clouds": "переменная облачность", "broken clouds": "облачно с прояснениями", "overcast clouds": "пасмурно", "shower rain": "ливень", "rain": "дождь", "light rain": "небольшой дождь", "moderate rain": "умеренный дождь", "heavy intensity rain": "сильный дождь", "thunderstorm": "гроза", "snow": "снег", "mist": "туман" },
         quiz: [
             { question: "🏃 В каком году были проведены первые современные Олимпийские игры?", options: ["1900", "1896", "1912", "1924"], answer: "1896" },
@@ -257,6 +259,7 @@ const translations = {
         quizResultBad: (score, total) => `<span class="text-warning"><i class="fas fa-lightbulb me-2"></i>Learn more about sports and come back! Your result: ${score}/${total}</span>`,
         quizRestartBtn: '<i class="fas fa-redo me-1"></i>Restart Quiz',
         quizTimerTitle: "Time to answer",
+        invalidPhoneNumber: "Invalid phone number format. Please enter in +... format.",
         weather: { "clear sky": "clear sky", "few clouds": "few clouds", "scattered clouds": "scattered clouds", "broken clouds": "broken clouds", "overcast clouds": "overcast clouds", "shower rain": "shower rain", "rain": "rain", "light rain": "light rain", "moderate rain": "moderate rain", "heavy intensity rain": "heavy intensity rain", "thunderstorm": "thunderstorm", "snow": "snow", "mist": "mist" },
         quiz: [
             { question: "🏃 In what year were the first modern Olympic Games held?", options: ["1900", "1896", "1912", "1924"], answer: "1896" },
@@ -603,17 +606,26 @@ function handleAuthStateChanged(user) {
     } else {
         // User is signed out
         authContainer.innerHTML = `
-            <button id="googleSignInBtn" class="btn btn-sm btn-google me-2" title="${translations[currentLang].signInWithGoogle.replace(/<[^>]*>?/gm, '')}">
-                ${translations[currentLang].signInWithGoogle}
-            </button>
-            <button id="phoneSignInBtn" class="btn btn-sm btn-outline-info" data-bs-toggle="modal" data-bs-target="#phoneAuthModal">
-                ${translations[currentLang].signInWithPhone}
-            </button>
+            <div class="btn-group" role="group">
+                <button id="googleSignInBtn" class="btn btn-sm btn-outline-danger" title="${translations[currentLang].signInWithGoogle.replace(/<[^>]*>?/gm, '')}">
+                    ${translations[currentLang].signInWithGoogle}
+                </button>
+                <button id="phoneSignInBtn" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#phoneAuthModal">
+                    ${translations[currentLang].signInWithPhone}
+                </button>
+            </div>
         `;
-        document.getElementById('googleSignInBtn').addEventListener('click', () => {
+        const googleBtn = document.getElementById('googleSignInBtn');
+        const phoneBtn = document.getElementById('phoneSignInBtn');
+
+        googleBtn.addEventListener('click', () => {
+            googleBtn.classList.add('active'); // Highlight button on click
+            if (phoneBtn) phoneBtn.classList.remove('active'); // Ensure other button is not active
             const provider = new firebase.auth.GoogleAuthProvider();
             auth.signInWithPopup(provider).catch(error => {
                 console.error("Sign-in error", error);
+            }).finally(() => {
+                googleBtn.classList.remove('active'); // Remove highlight after popup closes
             });
         });
 
@@ -676,8 +688,18 @@ document.addEventListener('DOMContentLoaded', (event) => {
         const verificationCodeInput = document.getElementById('verification-code');
         const errorElement = document.getElementById('phone-auth-error');
 
+        // Add event listeners for modal show/hide to toggle active state on buttons
+        phoneAuthModalEl.addEventListener('show.bs.modal', () => {
+            const phoneBtn = document.getElementById('phoneSignInBtn');
+            const googleBtn = document.getElementById('googleSignInBtn');
+            if (phoneBtn) phoneBtn.classList.add('active');
+            if (googleBtn) googleBtn.classList.remove('active'); // Ensure other button is not active
+        });
+
         // Reset modal state when it's hidden
         phoneAuthModalEl.addEventListener('hidden.bs.modal', () => {
+            const phoneBtn = document.getElementById('phoneSignInBtn');
+            if (phoneBtn) phoneBtn.classList.remove('active');
             phoneInputView.classList.remove('d-none');
             codeInputView.classList.add('d-none');
             phoneNumberInput.value = '';
@@ -691,9 +713,19 @@ document.addEventListener('DOMContentLoaded', (event) => {
             });
 
             sendCodeBtn.onclick = () => {
-                const phoneNumber = phoneNumberInput.value;
+                const phoneNumberRaw = phoneNumberInput.value.trim();
                 const appVerifier = window.recaptchaVerifier;
-                auth.signInWithPhoneNumber(phoneNumber, appVerifier)
+
+                // Convert number to E.164 format for Firebase
+                let phoneNumber = phoneNumberRaw.replace(/\D/g, ''); // Get only digits
+
+                // If number starts with 8 (common local format for KZ), replace with 7
+                if (phoneNumber.startsWith('8') && phoneNumber.length === 11) {
+                    phoneNumber = '7' + phoneNumber.substring(1);
+                }
+                const formattedPhoneNumber = '+' + phoneNumber;
+
+                auth.signInWithPhoneNumber(formattedPhoneNumber, appVerifier)
                     .then((confirmationResult) => {
                         window.confirmationResult = confirmationResult;
                         phoneInputView.classList.add('d-none');
@@ -701,7 +733,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
                         errorElement.textContent = '';
                     }).catch((error) => {
                         console.error("SMS not sent", error);
-                        errorElement.textContent = error.message;
+                        // Provide a more user-friendly error for invalid format
+                        errorElement.textContent = (error.code === 'auth/invalid-phone-number')
+                            ? (translations[currentLang].invalidPhoneNumber || 'Invalid phone number format.')
+                            : error.message;
                         recaptchaVerifier.render().then(widgetId => {
                             if (widgetId !== undefined) {
                                 recaptchaVerifier.reset(widgetId);
